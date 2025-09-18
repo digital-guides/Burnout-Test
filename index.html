@@ -3,54 +3,69 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Test de Burnout – Desbloquea tu Potencial Profesional</title>
+  <title>Cuestionario de Autodiagnóstico – Síndrome de Burnout</title>
+  <meta name="description" content="Cuestionario diagnóstico para identificar síntomas del síndrome de burnout.">
   <style>
-    :root { --brand:#f97316; --ink:#111; --muted:#666; --bg:#fff; --card:#f7fafc; --header-bg:#0a0f48; }
-    * { box-sizing: border-box; }
-    body { font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif; margin:0; color:var(--ink); background:var(--bg); }
-    header { padding:24px 16px; text-align:center; background:var(--header-bg); color:white; }
-    header img { max-height:90px; margin-bottom:12px; }
-    h1 { margin:0 0 6px; font-size:clamp(22px,4vw,28px); }
-    p.lead { margin:0; color:#e2e8f0; }
-    main { max-width:860px; margin:20px auto; padding:0 16px 40px; }
-    .card { background:var(--card); border:1px solid #e5e7eb; border-radius:14px; padding:18px; margin:14px 0; }
-    .q { font-weight:600; margin-bottom:8px; }
-    .opt { display:block; padding:10px 12px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; margin:8px 0; cursor:pointer; }
-    .opt input { margin-right:8px; }
-    .bar { height:10px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin:12px 0 4px; }
-    .fill { height:100%; width:0%; background:var(--brand); transition:width .25s ease; }
-    .muted { color:var(--muted); font-size:13px; }
-    .row { display:flex; gap:10px; flex-wrap:wrap; }
-    button { cursor:pointer; border:0; border-radius:10px; padding:12px 16px; font-weight:600; }
-    .primary { background:var(--brand); color:white; }
-    .ghost { background:#ffffff; border:1px solid #e5e7eb; color:#111; }
-    .result { border-left:6px solid var(--brand); background:#fff7ed; }
-    .badge { display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; }
-    .ok { background:#dcfce7; }
-    .mid { background:#fef9c3; }
-    .high { background:#fee2e2; }
-    footer { text-align:center; padding:20px; color:#94a3b8; font-size:12px;}
+    :root{
+      --brand:#f97316; --brand-2:#0a0f48;
+      --ink:#0f172a; --muted:#64748b; --bg:#fff; --card:#f8fafc;
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif}
+    header{padding:24px 16px;text-align:center;background:var(--brand-2);color:#fff}
+    header img{max-height:88px;margin-bottom:8px}
+    h1{margin:4px 0 2px;font-size:clamp(22px,4vw,30px)}
+    .lead{margin:0;color:#e2e8f0}
+    main{max-width:900px;margin:22px auto;padding:0 16px 48px}
+    .card{background:var(--card);border:1px solid #e5e7eb;border-radius:var(--radius);padding:18px;margin:14px 0}
+    .muted{color:var(--muted)}
+    .bar{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin:10px 0}
+    .fill{height:100%;width:0%;background:var(--brand);transition:width .25s ease}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .q{font-weight:700;margin-bottom:10px}
+    .opt{display:block;padding:10px 12px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin:8px 0;cursor:pointer}
+    .opt input{margin-right:10px}
+    button{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:700}
+    .primary{background:var(--brand);color:#fff}
+    .ghost{background:#fff;border:1px solid #e5e7eb}
+    .result{border-left:6px solid var(--brand);background:#fff7ed}
+    .badge{display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:800}
+    .ok{background:#16a34a20;color:#16a34a}
+    .mid{background:#f59e0b20;color:#f59e0b}
+    .high{background:#ef444420;color:#ef4444}
+    h2.section{margin:16px 0 8px;font-size:18px}
+    footer{text-align:center;padding:22px;color:#94a3b8;font-size:12px}
   </style>
 </head>
 <body>
   <header>
     <img src="logo77.png" alt="Desbloquea tu Potencial Profesional">
-    <h1>Test de Burnout</h1>
-    <p class="lead">Evalúa tu nivel de agotamiento laboral en 2 minutos.</p>
+    <h1>Cuestionario de Autodiagnóstico – Síndrome de Burnout</h1>
+    <p class="lead">Elaborado por MSc. María Auxiliadora Vielma</p>
   </header>
 
   <main>
+    <!-- Introducción -->
+    <section class="card">
+      <p><strong>Este cuestionario de autodiagnóstico</strong> está diseñado para identificar posibles síntomas del síndrome de burnout. Es una herramienta simple y práctica que te ayudará a tener una visión clara de tu situación psico-emocional en el ámbito laboral.</p>
+      <p><strong>Instrucciones:</strong> Responde a cada pregunta con la opción que mejor describa tu situación actual, basándote en cómo te has sentido en las últimas semanas.</p>
+           
+    </section>
+
+    <!-- Progreso -->
     <section id="progress" class="card">
-      <div class="row" style="align-items:center; justify-content:space-between;">
+      <div class="row" style="justify-content:space-between">
         <div><strong>Progreso</strong> <span class="muted" id="pct">0%</span></div>
         <div class="muted"><span id="count">0</span>/<span id="total">0</span> respondidas</div>
       </div>
       <div class="bar"><div class="fill" id="fill"></div></div>
-      <div class="muted">No guardamos datos personales.</div>
     </section>
 
+    <!-- Preguntas -->
     <section id="quiz"></section>
 
+    <!-- Botones -->
     <section class="card">
       <div class="row">
         <button class="primary" id="btnFinish">Ver resultados</button>
@@ -58,47 +73,111 @@
       </div>
     </section>
 
+    <!-- Resultado -->
     <section id="result" class="card result" style="display:none"></section>
   </main>
 
-  <footer>© Desbloquea tu Potencial Profesional – Herramienta interactiva</footer>
+  <footer>
+    © Desbloquea tu Potencial Profesional – Elaborado por MSc. María Auxiliadora Vielma<br>
+    <em>Este cuestionario es una herramienta de autodiagnóstico orientativa y no sustituye la valoración de un profesional de la salud.</em>
+  </footer>
 
   <script>
-    const QUESTIONS = [
-      "Me siento emocionalmente agotad@ por mi trabajo.",
-      "Me cuesta concentrarme durante mi jornada.",
-      "Me irrito con facilidad por temas laborales.",
-      "Siento que mi trabajo no tiene impacto.",
-      "Me resulta difícil desconectar al terminar el día.",
-      "Tengo dolores de cabeza/tensión muscular con frecuencia.",
-      "Duermo mal o me despierto pensando en el trabajo.",
-      "Evito tareas o reuniones por cansancio mental.",
-      "Me siento distante o cínic@ con colegas o clientes.",
-      "Dudo de mi capacidad para hacer bien mi trabajo."
+    const LABELS = [
+      "Nunca o casi nunca",
+      "Pocas veces al mes",
+      "Algunas veces al mes",
+      "Varias veces a la semana",
+      "Diariamente"
     ];
-    const LABELS = ["Nunca (0)","Rara vez (1)","A veces (2)","A menudo (3)","Siempre (4)"];
+    const SECTIONS = [
+      {title:"Sección 1: Agotamiento Emocional y Físico",items:[
+        "¿Con qué frecuencia te sientes emocionalmente agotado por tu trabajo?",
+        "¿Te sientes cansado al despertar y sin ganas de ir a trabajar?",
+        "¿Sientes que tu trabajo está absorbiendo toda tu energía mental y física?",
+        "¿Tienes problemas para dormir, como insomnio o sueño fragmentado?"
+      ]},
+      {title:"Sección 2: Cinismo y Despersonalización",items:[
+        "¿Con qué frecuencia te sientes desilusionado con tu trabajo?",
+        "¿Has desarrollado una actitud más cínica o negativa hacia tus colegas, clientes o tu profesión?",
+        "¿Sientes que te has distanciado emocionalmente de las personas con las que trabajas?",
+        "¿Sientes que tu trabajo ha perdido su sentido o su valor para ti?"
+      ]},
+      {title:"Sección 3: Falta de Realización Personal",items:[
+        "¿Con qué frecuencia sientes que tus logros en el trabajo no son significativos?",
+        "¿Crees que tu capacidad para resolver problemas ha disminuido?",
+        "¿Sientes que ya no eres tan efectivo en tu trabajo como antes?",
+        "¿Has perdido el interés en los nuevos desafíos o proyectos en el trabajo?"
+      ]}
+    ];
     const RANGES = [
-      {min:0,max:13,title:"Riesgo bajo",badge:"ok",msg:"Tu puntuación está <b>entre 0–13 puntos</b>. Señales leves de estrés. Mantén hábitos de autocuidado y límites saludables."},
-      {min:14,max:24,title:"Riesgo moderado",badge:"mid",msg:"Tu puntuación está <b>entre 14–24 puntos</b>. Hay indicios de agotamiento. Ajusta carga, prioriza tareas y conversa con tu líder."},
-      {min:25,max:40,title:"Riesgo alto",badge:"high",msg:"Tu puntuación está <b>entre 25–40 puntos</b>. Revisa descanso, apoyo del equipo y, si puedes, busca acompañamiento profesional."}
+      {min:12,max:24,title:"Riesgo bajo",badge:"ok",text:"Tu nivel de riesgo de burnout es bajo. Mantén hábitos saludables para prevenir el agotamiento."},
+      {min:25,max:48,title:"Zona de advertencia",badge:"mid",text:"Experimentas algunos síntomas de burnout. Es un buen momento para ajustar hábitos y buscar estrategias de bienestar."},
+      {min:49,max:60,title:"Alto riesgo",badge:"high",text:"Alto riesgo de burnout. Es crucial que tomes medidas inmediatas y busques apoyo profesional."}
     ];
 
-    const $quiz=document.getElementById("quiz"),$result=document.getElementById("result"),$pct=document.getElementById("pct"),$count=document.getElementById("count"),$total=document.getElementById("total"),$fill=document.getElementById("fill"),$btnFinish=document.getElementById("btnFinish"),$btnReset=document.getElementById("btnReset");
-    $total.textContent=QUESTIONS.length;
+    const $quiz=document.getElementById("quiz"),$result=document.getElementById("result"),$pct=document.getElementById("pct"),$count=document.getElementById("count"),$total=document.getElementById("total"),$fill=document.getElementById("fill");
+    const $btnFinish=document.getElementById("btnFinish"),$btnReset=document.getElementById("btnReset");
 
-    function renderQuiz(){ $quiz.innerHTML=""; QUESTIONS.forEach((t,i)=>{ const card=document.createElement("section"); card.className="card"; const q=document.createElement("div"); q.className="q"; q.textContent=(i+1)+". "+t; card.appendChild(q); const group=document.createElement("div"); LABELS.forEach((label,val)=>{ const id=`q${i}_${val}`; const wrap=document.createElement("label"); wrap.className="opt"; wrap.innerHTML=`<input type="radio" name="q${i}" id="${id}" value="${val}"> ${label}`; group.appendChild(wrap); }); card.appendChild(group); $quiz.appendChild(card); });}
+    let totalQuestions=SECTIONS.reduce((a,s)=>a+s.items.length,0);
+    $total.textContent=totalQuestions;
+
+    function renderQuiz(){
+      let idx=0;
+      $quiz.innerHTML="";
+      SECTIONS.forEach(sec=>{
+        const h=document.createElement("h2");
+        h.className="section";
+        h.textContent=sec.title;
+        $quiz.appendChild(h);
+        sec.items.forEach(text=>{
+          const card=document.createElement("section");card.className="card";
+          const q=document.createElement("div");q.className="q";q.textContent=(++idx)+". "+text;card.appendChild(q);
+          LABELS.forEach((label,v)=>{
+            const wrap=document.createElement("label");wrap.className="opt";
+            const value=v+1;
+            wrap.innerHTML=`<input type="radio" name="q${idx}" value="${value}"> ${label}`;
+            card.appendChild(wrap);
+          });
+          $quiz.appendChild(card);
+        });
+      });
+    }
     renderQuiz();
 
-    function getAnswers(){ const values=[]; let answered=0; QUESTIONS.forEach((_,i)=>{ const picked=document.querySelector(`input[name="q${i}"]:checked`); values[i]=picked?Number(picked.value):null; if(picked) answered++; }); return {values,answered}; }
-    function updateProgress(){ const {answered}=getAnswers(); const pct=Math.round((answered/QUESTIONS.length)*100); $pct.textContent=pct+"%"; $count.textContent=answered; $fill.style.width=pct+"%"; }
-    document.addEventListener("change",(e)=>{ if(e.target.matches('input[type="radio"]')) updateProgress(); });
+    function getAnswers(){
+      let values=[],answered=0;
+      for(let i=1;i<=totalQuestions;i++){
+        const picked=document.querySelector(`input[name="q${i}"]:checked`);
+        const v=picked?Number(picked.value):null;
+        values.push(v);if(v!==null)answered++;
+      }
+      return{values,answered};
+    }
+    function updateProgress(){
+      const{answered}=getAnswers();
+      const pct=Math.round((answered/totalQuestions)*100);
+      $pct.textContent=pct+"%";$count.textContent=answered;$fill.style.width=pct+"%";
+    }
+    document.addEventListener("change",e=>{
+      if(e.target.matches('input[type="radio"]'))updateProgress();
+    });
 
-    function computeScore(values){ return values.reduce((acc,v)=>acc+(v??0),0); }
-    function classify(score){ return RANGES.find(r=>score>=r.min&&score<=r.max)||RANGES[RANGES.length-1]; }
+    function sum(values){return values.reduce((a,v)=>a+(v||0),0);}
+    function classify(total){return RANGES.find(r=>total>=r.min&&total<=r.max)||RANGES[RANGES.length-1];}
 
-    $btnFinish.addEventListener("click",()=>{ const {values,answered}=getAnswers(); if(answered<QUESTIONS.length){ alert("Te faltan respuestas 🙏"); return; } const score=computeScore(values); const range=classify(score); $result.style.display="block"; $result.innerHTML=`<h2 style="margin:0 0 6px;">Resultado: <span class="badge ${range.badge}">${range.title}</span></h2><p>Puntaje total: <b>${score}</b> (entre ${range.min}–${range.max} puntos)</p><p>${range.msg}</p>`; window.scrollTo({top:$result.offsetTop-10,behavior:"smooth"}); });
-
-    $btnReset.addEventListener("click",()=>{ document.querySelectorAll('input[type="radio"]').forEach(i=>i.checked=false); $result.style.display="none"; updateProgress(); window.scrollTo({top:0,behavior:"smooth"}); });
+    $btnFinish.addEventListener("click",()=>{
+      const{values,answered}=getAnswers();
+      if(answered<totalQuestions){alert("Por favor responde todas las preguntas.");return;}
+      const total=sum(values),r=classify(total);
+      $result.style.display="block";
+      $result.innerHTML=`<h2>Resultado</h2><p>Puntaje total: <b>${total}</b> (mínimo 12 – máximo 60)</p><p class="badge ${r.badge}">${r.title}</p><p>${r.text}</p>`;
+      window.scrollTo({top:$result.offsetTop-10,behavior:"smooth"});
+    });
+    $btnReset.addEventListener("click",()=>{
+      document.querySelectorAll('input[type="radio"]').forEach(i=>i.checked=false);
+      $result.style.display="none";updateProgress();window.scrollTo({top:0,behavior:"smooth"});
+    });
     updateProgress();
   </script>
 </body>
