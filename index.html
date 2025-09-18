@@ -50,7 +50,6 @@
     <section class="card">
       <p><strong>Este cuestionario de autodiagnóstico</strong> está diseñado para identificar posibles síntomas del síndrome de burnout. Es una herramienta simple y práctica que te ayudará a tener una visión clara de tu situación psico-emocional en el ámbito laboral.</p>
       <p><strong>Instrucciones:</strong> Responde a cada pregunta con la opción que mejor describa tu situación actual, basándote en cómo te has sentido en las últimas semanas.</p>
-           
     </section>
 
     <!-- Progreso -->
@@ -82,103 +81,7 @@
     <em>Este cuestionario es una herramienta de autodiagnóstico orientativa y no sustituye la valoración de un profesional de la salud.</em>
   </footer>
 
-  <script>
-    const LABELS = [
-      "Nunca o casi nunca",
-      "Pocas veces al mes",
-      "Algunas veces al mes",
-      "Varias veces a la semana",
-      "Diariamente"
-    ];
-    const SECTIONS = [
-      {title:"Sección 1: Agotamiento Emocional y Físico",items:[
-        "¿Con qué frecuencia te sientes emocionalmente agotado por tu trabajo?",
-        "¿Te sientes cansado al despertar y sin ganas de ir a trabajar?",
-        "¿Sientes que tu trabajo está absorbiendo toda tu energía mental y física?",
-        "¿Tienes problemas para dormir, como insomnio o sueño fragmentado?"
-      ]},
-      {title:"Sección 2: Cinismo y Despersonalización",items:[
-        "¿Con qué frecuencia te sientes desilusionado con tu trabajo?",
-        "¿Has desarrollado una actitud más cínica o negativa hacia tus colegas, clientes o tu profesión?",
-        "¿Sientes que te has distanciado emocionalmente de las personas con las que trabajas?",
-        "¿Sientes que tu trabajo ha perdido su sentido o su valor para ti?"
-      ]},
-      {title:"Sección 3: Falta de Realización Personal",items:[
-        "¿Con qué frecuencia sientes que tus logros en el trabajo no son significativos?",
-        "¿Crees que tu capacidad para resolver problemas ha disminuido?",
-        "¿Sientes que ya no eres tan efectivo en tu trabajo como antes?",
-        "¿Has perdido el interés en los nuevos desafíos o proyectos en el trabajo?"
-      ]}
-    ];
-    const RANGES = [
-      {min:12,max:24,title:"Riesgo bajo",badge:"ok",text:"Tu nivel de riesgo de burnout es bajo. Mantén hábitos saludables para prevenir el agotamiento."},
-      {min:25,max:48,title:"Zona de advertencia",badge:"mid",text:"Experimentas algunos síntomas de burnout. Es un buen momento para ajustar hábitos y buscar estrategias de bienestar."},
-      {min:49,max:60,title:"Alto riesgo",badge:"high",text:"Alto riesgo de burnout. Es crucial que tomes medidas inmediatas y busques apoyo profesional."}
-    ];
-
-    const $quiz=document.getElementById("quiz"),$result=document.getElementById("result"),$pct=document.getElementById("pct"),$count=document.getElementById("count"),$total=document.getElementById("total"),$fill=document.getElementById("fill");
-    const $btnFinish=document.getElementById("btnFinish"),$btnReset=document.getElementById("btnReset");
-
-    let totalQuestions=SECTIONS.reduce((a,s)=>a+s.items.length,0);
-    $total.textContent=totalQuestions;
-
-    function renderQuiz(){
-      let idx=0;
-      $quiz.innerHTML="";
-      SECTIONS.forEach(sec=>{
-        const h=document.createElement("h2");
-        h.className="section";
-        h.textContent=sec.title;
-        $quiz.appendChild(h);
-        sec.items.forEach(text=>{
-          const card=document.createElement("section");card.className="card";
-          const q=document.createElement("div");q.className="q";q.textContent=(++idx)+". "+text;card.appendChild(q);
-          LABELS.forEach((label,v)=>{
-            const wrap=document.createElement("label");wrap.className="opt";
-            const value=v+1;
-            wrap.innerHTML=`<input type="radio" name="q${idx}" value="${value}"> ${label}`;
-            card.appendChild(wrap);
-          });
-          $quiz.appendChild(card);
-        });
-      });
-    }
-    renderQuiz();
-
-    function getAnswers(){
-      let values=[],answered=0;
-      for(let i=1;i<=totalQuestions;i++){
-        const picked=document.querySelector(`input[name="q${i}"]:checked`);
-        const v=picked?Number(picked.value):null;
-        values.push(v);if(v!==null)answered++;
-      }
-      return{values,answered};
-    }
-    function updateProgress(){
-      const{answered}=getAnswers();
-      const pct=Math.round((answered/totalQuestions)*100);
-      $pct.textContent=pct+"%";$count.textContent=answered;$fill.style.width=pct+"%";
-    }
-    document.addEventListener("change",e=>{
-      if(e.target.matches('input[type="radio"]'))updateProgress();
-    });
-
-    function sum(values){return values.reduce((a,v)=>a+(v||0),0);}
-    function classify(total){return RANGES.find(r=>total>=r.min&&total<=r.max)||RANGES[RANGES.length-1];}
-
-    $btnFinish.addEventListener("click",()=>{
-      const{values,answered}=getAnswers();
-      if(answered<totalQuestions){alert("Por favor responde todas las preguntas.");return;}
-      const total=sum(values),r=classify(total);
-      $result.style.display="block";
-      $result.innerHTML=`<h2>Resultado</h2><p>Puntaje total: <b>${total}</b> (mínimo 12 – máximo 60)</p><p class="badge ${r.badge}">${r.title}</p><p>${r.text}</p>`;
-      window.scrollTo({top:$result.offsetTop-10,behavior:"smooth"});
-    });
-    $btnReset.addEventListener("click",()=>{
-      document.querySelectorAll('input[type="radio"]').forEach(i=>i.checked=false);
-      $result.style.display="none";updateProgress();window.scrollTo({top:0,behavior:"smooth"});
-    });
-    updateProgress();
-  </script>
+  <!-- Aquí llamamos al script externo -->
+  <script src="app.js" defer></script>
 </body>
 </html>
