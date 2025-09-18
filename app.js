@@ -349,3 +349,4 @@ $btnReset.addEventListener("click", () => {
 updateProgress();
 
 
+
