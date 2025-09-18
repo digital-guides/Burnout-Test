@@ -1,8 +1,12 @@
-console.log("app.js cargado ✔");
+// Señales de diagnóstico
+console.log("app.js solicitado");
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM listo; iniciando cuestionario");
+
   try {
-    const LABELS = [
+    // ===== CONFIGURACIÓN =====
+    var LABELS = [
       "Nunca o casi nunca",
       "Pocas veces al mes",
       "Algunas veces al mes",
@@ -10,76 +14,92 @@ document.addEventListener("DOMContentLoaded", () => {
       "Diariamente"
     ];
 
-    const SECTIONS = [
+    var SECTIONS = [
       { title: "Sección 1: Agotamiento Emocional y Físico", items: [
           "¿Con qué frecuencia te sientes emocionalmente agotado por tu trabajo?",
           "¿Te sientes cansado al despertar y sin ganas de ir a trabajar?",
           "¿Sientes que tu trabajo está absorbiendo toda tu energía mental y física?",
           "¿Tienes problemas para dormir, como insomnio o sueño fragmentado?"
-        ]},
+        ]
+      },
       { title: "Sección 2: Cinismo y Despersonalización", items: [
           "¿Con qué frecuencia te sientes desilusionado con tu trabajo?",
           "¿Has desarrollado una actitud más cínica o negativa hacia tus colegas, clientes o tu profesión?",
           "¿Sientes que te has distanciado emocionalmente de las personas con las que trabajas?",
           "¿Sientes que tu trabajo ha perdido su sentido o su valor para ti?"
-        ]},
+        ]
+      },
       { title: "Sección 3: Falta de Realización Personal", items: [
           "¿Con qué frecuencia sientes que tus logros en el trabajo no son significativos?",
           "¿Crees que tu capacidad para resolver problemas ha disminuido?",
           "¿Sientes que ya no eres tan efectivo en tu trabajo como antes?",
           "¿Has perdido el interés en los nuevos desafíos o proyectos en el trabajo?"
-        ]}
+        ]
+      }
     ];
 
-    const RANGES = [
-      { min: 12, max: 24, title: "Riesgo bajo",  badge: "ok",
-        text: "Tu nivel de riesgo de burnout es bajo. Aunque puedes experimentar estrés ocasional, tu situación es manejable. Es importante mantener hábitos saludables para seguir previniendo el agotamiento." },
-      { min: 25, max: 48, title: "Zona de advertencia", badge: "mid",
-        text: "Estás en una zona de advertencia. Experimentas algunos síntomas de burnout. Te sientes estresado y podrías estar perdiendo el entusiasmo por tu trabajo. Es un buen momento para evaluar tus hábitos, establecer límites y buscar estrategias de bienestar." },
-      { min: 49, max: 60, title: "Alto riesgo de burnout", badge: "high",
-        text: "Estás en alto riesgo de burnout o ya lo estás experimentando. Los síntomas son severos y afectan significativamente tu bienestar. No ignores estas señales. Es crucial que tomes medidas de inmediato, como buscar apoyo profesional (un psicólogo, un coach) y hablar con tu supervisor o equipo de Talento Humano para encontrar soluciones. Este no es un signo de debilidad, sino una señal de que necesitas un cambio." }
+    // Interpretaciones EXACTAS del PDF
+    var RANGES = [
+      {
+        min: 12, max: 24, title: "Riesgo bajo", badge: "ok",
+        text:
+          "Tu nivel de riesgo de burnout es bajo. Aunque puedes experimentar estrés ocasional, tu situación es manejable. Es importante mantener hábitos saludables para seguir previniendo el agotamiento."
+      },
+      {
+        min: 25, max: 48, title: "Zona de advertencia", badge: "mid",
+        text:
+          "Estás en una zona de advertencia. Experimentas algunos síntomas de burnout. Te sientes estresado y podrías estar perdiendo el entusiasmo por tu trabajo. Es un buen momento para evaluar tus hábitos, establecer límites y buscar estrategias de bienestar."
+      },
+      {
+        min: 49, max: 60, title: "Alto riesgo de burnout", badge: "high",
+        text:
+          "Estás en alto riesgo de burnout o ya lo estás experimentando. Los síntomas son severos y afectan significativamente tu bienestar. No ignores estas señales. Es crucial que tomes medidas de inmediato, como buscar apoyo profesional (un psicólogo, un coach) y hablar con tu supervisor o equipo de Talento Humano para encontrar soluciones. Este no es un signo de debilidad, sino una señal de que necesitas un cambio."
+      }
     ];
 
-    const $quiz   = document.getElementById("quiz");
-    const $result = document.getElementById("result");
-    const $pct    = document.getElementById("pct");
-    const $count  = document.getElementById("count");
-    const $total  = document.getElementById("total");
-    const $fill   = document.getElementById("fill");
-    const $btnFinish = document.getElementById("btnFinish");
-    const $btnReset  = document.getElementById("btnReset");
+    // ===== REFERENCIAS AL DOM =====
+    var $quiz    = document.getElementById("quiz");
+    var $result  = document.getElementById("result");
+    var $pct     = document.getElementById("pct");
+    var $count   = document.getElementById("count");
+    var $total   = document.getElementById("total");
+    var $fill    = document.getElementById("fill");
+    var $btnOk   = document.getElementById("btnFinish");
+    var $btnRst  = document.getElementById("btnReset");
 
-    if (!($quiz && $result && $pct && $count && $total && $fill && $btnFinish && $btnReset)) {
-      throw new Error("Faltan elementos esperados en el HTML (ids).");
+    if (!($quiz && $result && $pct && $count && $total && $fill && $btnOk && $btnRst)) {
+      throw new Error("Faltan elementos con ids esperados en el HTML.");
     }
 
-    const totalQuestions = SECTIONS.reduce((a,s)=>a+s.items.length,0);
+    // ===== RENDER =====
+    var totalQuestions = SECTIONS.reduce(function (acc, s) { return acc + s.items.length; }, 0);
     $total.textContent = String(totalQuestions);
 
-    function renderQuiz(){
-      let idx = 0;
+    function renderQuiz() {
+      var idx = 0;
       $quiz.innerHTML = "";
-      SECTIONS.forEach(sec=>{
-        const h = document.createElement("h2");
-        h.className="section";
-        h.textContent=sec.title;
+
+      SECTIONS.forEach(function (sec) {
+        var h = document.createElement("h2");
+        h.className = "section";
+        h.textContent = sec.title;
         $quiz.appendChild(h);
 
-        sec.items.forEach(text=>{
-          const card = document.createElement("section");
+        sec.items.forEach(function (text) {
+          var card = document.createElement("section");
           card.className = "card";
 
-          const q = document.createElement("div");
+          var q = document.createElement("div");
           q.className = "q";
           q.textContent = (++idx) + ". " + text;
           card.appendChild(q);
 
-          LABELS.forEach((label,i)=>{
-            const wrap = document.createElement("label");
-            wrap.className="opt";
-            const value = i+1;
-            // uso comillas simples para evitar conflictos
-            wrap.innerHTML = '<input type="radio" name="q'+idx+'" value="'+value+'"> ' + label;
+          LABELS.forEach(function (label, i) {
+            var wrap = document.createElement("label");
+            wrap.className = "opt";
+            var value = i + 1;
+            // uso comillas simples en HTML para minimizar errores
+            wrap.innerHTML = '<input type="radio" name="q' + idx + '" value="' + value + '"> ' + label;
             card.appendChild(wrap);
           });
 
@@ -89,63 +109,84 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     renderQuiz();
 
-    function getAnswers(){
-      const values=[]; let answered=0;
-      for(let i=1;i<=totalQuestions;i++){
-        const picked = document.querySelector('input[name="q'+i+'"]:checked');
-        const v = picked ? Number(picked.value) : null;
-        values.push(v); if(v!==null) answered++;
+    // ===== LÓGICA =====
+    function getAnswers() {
+      var values = [];
+      var answered = 0;
+      for (var i = 1; i <= totalQuestions; i++) {
+        var picked = document.querySelector('input[name="q' + i + '"]:checked');
+        var v = picked ? Number(picked.value) : null;
+        values.push(v);
+        if (v !== null) answered++;
       }
-      return { values, answered };
+      return { values: values, answered: answered };
     }
-    function updateProgress(){
-      const { answered } = getAnswers();
-      const pct = Math.round((answered/totalQuestions)*100);
+
+    function updateProgress() {
+      var st = getAnswers();
+      var pct = Math.round((st.answered / totalQuestions) * 100);
       $pct.textContent = pct + "%";
-      $count.textContent = String(answered);
+      $count.textContent = String(st.answered);
       $fill.style.width = pct + "%";
     }
-    document.addEventListener("change", e=>{
-      if(e.target.matches('input[type="radio"]')) updateProgress();
+
+    function sum(values) {
+      return values.reduce(function (a, v) { return a + (v || 0); }, 0);
+    }
+
+    function classify(total) {
+      for (var i = 0; i < RANGES.length; i++) {
+        var r = RANGES[i];
+        if (total >= r.min && total <= r.max) return r;
+      }
+      return RANGES[RANGES.length - 1];
+    }
+
+    document.addEventListener("change", function (e) {
+      if (e.target && e.target.matches('input[type="radio"]')) updateProgress();
     });
 
-    function sum(values){ return values.reduce((a,v)=>a+(v||0),0); }
-    function classify(total){ return RANGES.find(r=>total>=r.min&&total<=r.max) || RANGES[RANGES.length-1]; }
+    $btnOk.addEventListener("click", function () {
+      var st = getAnswers();
+      if (st.answered < totalQuestions) {
+        alert("Por favor responde todas las preguntas.");
+        return;
+      }
+      var total = sum(st.values);
+      var r = classify(total);
 
-    $btnFinish.addEventListener("click", ()=>{
-      const { values, answered } = getAnswers();
-      if(answered<totalQuestions){ alert("Por favor responde todas las preguntas."); return; }
-      const total = sum(values);
-      const r = classify(total);
-      // sin backticks para evitar errores si se edita
       $result.style.display = "block";
       $result.innerHTML =
         '<h2>Resultado</h2>' +
-        '<p>Puntaje total: <b>'+ total +'</b></p>' +
-        '<p class="badge '+ r.badge +'">'+ r.title +'</p>' +
-        '<p>'+ r.text +'</p>';
+        '<p>Puntaje total: <b>' + total + '</b></p>' +
+        '<p class="badge ' + r.badge + '">' + r.title + '</p>' +
+        '<p>' + r.text + '</p>';
+
       window.scrollTo({ top: $result.offsetTop - 10, behavior: "smooth" });
     });
 
-    $btnReset.addEventListener("click", ()=>{
-      document.querySelectorAll('input[type="radio"]').forEach(i=> i.checked=false);
-      $result.style.display="none";
+    $btnRst.addEventListener("click", function () {
+      var inputs = document.querySelectorAll('input[type="radio"]');
+      inputs.forEach(function (i) { i.checked = false; });
+      $result.style.display = "none";
       updateProgress();
-      window.scrollTo({ top:0, behavior:"smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
+    // Init
     updateProgress();
-    console.log("app.js ejecutado ✔");
-  } catch(err) {
-    console.error(err);
-    const box = document.getElementById("result");
+    console.log("Cuestionario activo ✔");
+  } catch (err) {
+    console.error("Error en app.js:", err);
+    var box = document.getElementById("result");
     if (box) {
       box.style.display = "block";
       box.style.borderLeft = "6px solid #ef4444";
       box.innerHTML =
         "<h2 style='margin-top:0'>Error en el script</h2>" +
-        "<p>"+ String(err.message || err) +"</p>";
+        "<pre style='white-space:pre-wrap'>" +
+        (err && err.stack ? err.stack : String(err)) +
+        "</pre>";
     }
   }
 });
-
