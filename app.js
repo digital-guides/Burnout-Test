@@ -36,15 +36,15 @@ const SECTIONS = [
 const RANGES = [
   {
     min: 12, max: 24, title: "Riesgo bajo", badge: "ok",
-    text: "Tu nivel de riesgo de burnout es bajo. Mantén hábitos saludables para prevenir el agotamiento."
+    text: "Tu nivel de riesgo de burnout es bajo. Aunque puedes experimentar estrés ocasional, tu situación es manejable. Es importante mantener hábitos saludables para seguir previniendo el agotamiento."
   },
   {
     min: 25, max: 48, title: "Zona de advertencia", badge: "mid",
-    text: "Experimentas algunos síntomas de burnout. Es un buen momento para ajustar hábitos y buscar estrategias de bienestar."
+    text: "Estás en una *zona de advertencia*. Experimentas algunos síntomas de burnout. Te sientes estresado y podrías estar perdiendo el entusiasmo por tu trabajo. Es un buen momento para evaluar tus hábitos, establecer límites y buscar estrategias de bienestar."
   },
   {
     min: 49, max: 60, title: "Alto riesgo", badge: "high",
-    text: "Alto riesgo de burnout. Es crucial que tomes medidas inmediatas y busques apoyo profesional."
+    text: "Estás en **alto riesgo de burnout** o ya lo estás experimentando. Los síntomas son severos y afectan significativamente tu bienestar. No ignores estas señales. Es crucial que tomes medidas de inmediato, como buscar apoyo profesional (un psicólogo, un coach) y hablar con tu supervisor o equipo de Talento Humano para encontrar soluciones. Este no es un signo de debilidad, sino una señal de que necesitas un cambio."
   }
 ];
 
@@ -139,7 +139,7 @@ $btnFinish.addEventListener("click", () => {
   $result.style.display = "block";
   $result.innerHTML = `
     <h2>Resultado</h2>
-    <p>Puntaje total: <b>${total}</b> (mínimo 12 – máximo 60)</p>
+    <p>Puntaje total: <b>${total}</b> </p>
     <p class="badge ${r.badge}">${r.title}</p>
     <p>${r.text}</p>
   `;
@@ -155,3 +155,4 @@ $btnReset.addEventListener("click", () => {
 
 // Init
 updateProgress();
+
